@@ -3,7 +3,7 @@ open Core
 open Lexing
 open Parser
 
-exception SyntaxError of string
+exception SyntaxError
 
 let next_line lexbuf =
   let { lex_curr_p; lex_curr_pos; } = lexbuf in
@@ -40,5 +40,5 @@ rule read =
   | crlf { CRLF (info lexbuf) }
   | newline { next_line lexbuf; read lexbuf }
   | "," { COMMA (info lexbuf) }
-  | _ { raise (SyntaxError (sprintf "Unexpected character: [%s]" (Lexing.lexeme lexbuf))) }
+  | _ { raise SyntaxError }
   | eof { EOF (info lexbuf) }

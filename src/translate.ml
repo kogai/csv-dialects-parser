@@ -12,8 +12,8 @@ let translate filename lexbuf =
     lexbuf
     |> parse
   with
-  | Lexer.SyntaxError msg as e ->
-    Printf.fprintf stderr "%s%!" msg;
+  | Lexer.SyntaxError as e ->
+    Printf.fprintf stderr "Syntax error [%s] @%s\n" (Lexing.lexeme lexbuf) (Syntax.show_info (Lexer.info lexbuf));
     raise @@ e
   | Parser.Error as e ->
     Printf.fprintf stderr "Parse error [%s] @%s\n" (Lexing.lexeme lexbuf) (Syntax.show_info (Lexer.info lexbuf));

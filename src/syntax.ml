@@ -1,7 +1,7 @@
 open Core
 
 type t = string list
-[@@deriving show]
+let show = String.concat ~sep:"\n"
 
 (* filename * line * column *)
 type info = string * int * int
