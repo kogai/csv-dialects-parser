@@ -12,12 +12,11 @@ let next_line lexbuf =
                     pos_lnum = lex_curr_p.pos_lnum + 1
   }
 
-  let info { lex_curr_p; lex_start_pos; } =
-    let { pos_fname; pos_lnum; pos_cnum; pos_bol; } = lex_curr_p in
-    Syntax.create_info pos_fname pos_lnum (pos_cnum - pos_bol)
+let info { lex_curr_p; lex_start_pos; } =
+  let { pos_fname; pos_lnum; pos_cnum; pos_bol; } = lex_curr_p in
+  Syntax.create_info pos_fname pos_lnum (pos_cnum - pos_bol)
 
-  let identifier lexbuf =
-    Lexing.lexeme lexbuf
+let identifier lexbuf = Lexing.lexeme lexbuf
 }
 
 let white = [' ' '\t']+
