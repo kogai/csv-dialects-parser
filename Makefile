@@ -1,4 +1,4 @@
-NAME := monkey
+NAME := csv_dialect
 TEST_NAME := $(NAME)_test
 PKGS := core,menhirlib,ppx_deriving,ppx_deriving.show
 SRC_FILES := $(shell find ./src -type f -name '*.m*')
@@ -7,7 +7,7 @@ SRC_DIRS := "src"
 OCB_FLAGS := -use-ocamlfind -use-menhir -Is $(SRC_DIRS) -pkgs $(PKGS)
 OCB := ocamlbuild $(OCB_FLAGS)
 OPAM_VER := 4.03.0
-ARGS := "fixture/bool.mky"
+ARGS := "fixture/rfc4180.csv"
 
 all:$(NAME).native $(NAME).byte
 
