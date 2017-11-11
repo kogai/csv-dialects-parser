@@ -24,13 +24,29 @@ let white = [' ' '\t']+
 let cr = '\r'
 let lf = '\n'
 let crlf = "\r\n"
-let field = ['a'-'z' 'A'-'Z' '0'-'9' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_']*
+let comma = ','
+let dq = '"'
+let dq2 = "\"\""
+
+let text_data = [^',' '\r' '\n' '"'] [^',' '\r' '\n' '"']*
+let escaped = text_data | comma | cr | lf | dq2
 
 rule read =
   parse
   | white { read lexbuf }
-  | crlf | cr | lf { next_line lexbuf; CRLF (info lexbuf) }
-  | "," { COMMA (info lexbuf) }
-  | field { FIELD ((info lexbuf), (Lexing.lexeme lexbuf)) }
+  | crlf { next_line lexbuf; CRLF (info lexbuf) }
+  | comma { COMMA (info lexbuf) }
+  | dq { FIELD ((info lexbuf), (read_field (Buffer.create 16) lexbuf)) }
+  | text_data { FIELD ((info lexbuf), (Lexing.lexeme lexbuf)) }
   | _ { raise SyntaxError }
   | eof { EOF (info lexbuf) }
+and read_field buf =
+  parse
+  | dq { Buffer.contents buf }
+  | escaped {
+    Buffer.add_string buf (Lexing.lexeme lexbuf);
+    read_field buf lexbuf
+  }
+  | _ { raise SyntaxError }
+  | eof { raise SyntaxError }
+
