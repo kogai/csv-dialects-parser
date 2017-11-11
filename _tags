@@ -1,0 +1,2 @@
+true: annot, bin_annot, thread
+<src/*>: package(ppx_deriving.std)

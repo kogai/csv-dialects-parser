@@ -1,0 +1,17 @@
+opam-version: "1.2"
+name: "csv-dialects-parser"
+version: "~0.0.1"
+maintainer: "小飼慎一 <>"
+authors: "小飼慎一 <>"
+homepage: "dummy"
+bug-reports: "dummy"
+license: "dummy"
+dev-repo: "git@github.com:kogai/csv-dialects-parser.git"
+build: [
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "csv-dialects-parser"]
+depends: [
+  "ocamlfind" {build}
+]
