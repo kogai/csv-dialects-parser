@@ -7,7 +7,7 @@ SRC_DIRS := "src"
 OCB_FLAGS := -use-ocamlfind -use-menhir -Is $(SRC_DIRS) -pkgs $(PKGS)
 OCB := ocamlbuild $(OCB_FLAGS)
 OPAM_VER := 4.03.0
-ARGS := "fixture/rfc4180.csv"
+ARGS := "fixture/rfc4180-escaped.csv"
 
 all:$(NAME).native $(NAME).byte
 
