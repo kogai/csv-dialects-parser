@@ -3,4 +3,4 @@ S src/**
 B _build/**
 B _build/src/*
 
-PKG core menhirlib
+PKG core menhirlib yojson

@@ -1,6 +1,6 @@
 NAME := csv_dialect
 TEST_NAME := $(NAME)_test
-PKGS := core,menhirlib,ppx_deriving,ppx_deriving.show
+PKGS := core,menhirlib,ppx_deriving,ppx_deriving.show,yojson
 SRC_FILES := $(shell find ./src -type f -name '*.m*')
 SRC_DIRS := "src"
 
@@ -43,7 +43,9 @@ install:
 	opam update && \
 	opam install -y \
 		ocamlfind \
+		ppx_deriving \
 		merlin \
+		yojson \
 		core
 
 .PHONY: setup
