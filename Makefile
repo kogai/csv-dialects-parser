@@ -7,7 +7,7 @@ SRC_DIRS := "src"
 OCB_FLAGS := -use-ocamlfind -use-menhir -Is $(SRC_DIRS) -pkgs $(PKGS)
 OCB := ocamlbuild $(OCB_FLAGS)
 OPAM_VER := 4.03.0
-ARGS := "fixture/dialect-01.csv"
+ARGS := "fixture/dialect_01.csv"
 
 all:$(NAME).native $(NAME).byte
 
