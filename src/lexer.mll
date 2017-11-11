@@ -2,21 +2,7 @@
 open Core
 open Lexing
 open Parser
-
-exception SyntaxError
-
-let next_line lexbuf =
-  let { lex_curr_p; lex_curr_pos; } = lexbuf in
-  lexbuf.lex_curr_p <- {
-    lex_curr_p with pos_bol = lex_curr_pos;
-                    pos_lnum = lex_curr_p.pos_lnum + 1
-  }
-
-let info { lex_curr_p; lex_start_pos; } =
-  let { pos_fname; pos_lnum; pos_cnum; pos_bol; } = lex_curr_p in
-  Syntax.create_info pos_fname pos_lnum (pos_cnum - pos_bol)
-
-let identifier lexbuf = Lexing.lexeme lexbuf
+open Syntax
 }
 
 let white = [' ' '\t']+
