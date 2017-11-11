@@ -1,5 +1,11 @@
-https://tools.ietf.org/html/rfc4180
-http://specs.frictionlessdata.io/csv-dialect/
+* https://tools.ietf.org/html/rfc4180
+* http://specs.frictionlessdata.io/csv-dialect/
+
+## Results of execution
+
+```
+fixture/*.csv -> fixture/*.json
+```
 
 ## ABNF
 

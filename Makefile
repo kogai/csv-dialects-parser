@@ -27,10 +27,9 @@ native: $(NAME).native
 byte: $(NAME).byte
 	@./$(NAME).byte $(ARGS)
 
-.PHONY: docker
-docker:
-	docker-compose build && \
-	docker-compose run $(NAME) make
+.PHONY: interpret
+interpret:
+	menhir --interpret --interpret-show-cst --interpret-error src/parser.mly
 
 .PHONY: run
 run:

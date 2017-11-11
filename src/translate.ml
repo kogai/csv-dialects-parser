@@ -9,8 +9,7 @@ let rec parse lexbuf =
 let translate filename lexbuf =
   lexbuf.lex_curr_p <- { lexbuf.lex_curr_p with pos_fname = filename };
   try
-    lexbuf
-    |> parse
+    parse lexbuf
   with
   | Lexer.SyntaxError as e ->
     Printf.fprintf stderr "Syntax error [%s] @%s\n" (Lexing.lexeme lexbuf) (Syntax.show_info (Lexer.info lexbuf));

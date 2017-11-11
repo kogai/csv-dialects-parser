@@ -23,22 +23,14 @@ let next_line lexbuf =
 let white = [' ' '\t']+
 let cr = '\r'
 let lf = '\n'
-let crlf = cr + lf
-let newline = cr | lf | crlf
+let crlf = "\r\n"
+let field = ['a'-'z' 'A'-'Z' '0'-'9' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_']*
 
-let id = ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_']*
-
-(* %token <Csv.info> CRLF
-%token <Csv.info> COMMA
-%token <Csv.info * string> FIELD
-%token <Csv.info * string> DQUOTE
-%token <Csv.info> EOF
-%start <Csv.t list> file *)
 rule read =
   parse
   | white { read lexbuf }
-  | crlf { CRLF (info lexbuf) }
-  | newline { next_line lexbuf; read lexbuf }
+  | crlf | cr | lf { next_line lexbuf; CRLF (info lexbuf) }
   | "," { COMMA (info lexbuf) }
+  | field { FIELD ((info lexbuf), (Lexing.lexeme lexbuf)) }
   | _ { raise SyntaxError }
   | eof { EOF (info lexbuf) }

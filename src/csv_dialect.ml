@@ -20,7 +20,7 @@ let run filename () =
   |> In_channel.create
   |> Lexing.from_channel
   |> Translate.translate filename
-  |> (fun s -> "ABC")
+  |> to_string
   |> write filename
 
 let () =
