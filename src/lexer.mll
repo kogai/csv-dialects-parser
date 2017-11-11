@@ -52,4 +52,3 @@ and read_field buf =
   }
   | _ { raise SyntaxError }
   | eof { raise SyntaxError }
-

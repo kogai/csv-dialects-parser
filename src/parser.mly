@@ -17,6 +17,4 @@ file:
 record:
   | t = separated_list(COMMA, field) CRLF { t }
 field:
-  | t = non_escaped { t }
-non_escaped:
   | t = FIELD { Tuple2.get2 t }
