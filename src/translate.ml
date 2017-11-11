@@ -2,7 +2,7 @@ open Core
 open Lexing
 
 let rec parse lexbuf =
-  match Parser.file Lexer.read lexbuf with
+  match Parser.file Lexer_dialect_01.read lexbuf with
   | [] -> []
   | field -> field::(parse lexbuf)
 
