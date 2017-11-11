@@ -43,6 +43,10 @@ rule read =
 and read_field buf =
   parse
   | dq { Buffer.contents buf }
+  | dq2 {
+    Buffer.add_char buf '"';
+    read_field buf lexbuf
+  }
   | escaped {
     Buffer.add_string buf (Lexing.lexeme lexbuf);
     read_field buf lexbuf
