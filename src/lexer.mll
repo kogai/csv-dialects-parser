@@ -47,4 +47,3 @@ and read_dialect01 =
   | text_data_dialect01 { FIELD ((info lexbuf), (Lexing.lexeme lexbuf)) }
   | _ { raise SyntaxError }
   | eof { EOF (info lexbuf) }
-

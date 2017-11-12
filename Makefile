@@ -31,10 +31,6 @@ byte: $(NAME).byte
 interpret:
 	menhir --interpret --interpret-show-cst --interpret-error src/parser.mly
 
-.PHONY: run
-run:
-	docker-compose run $(NAME) $(ARGS)
-
 .PHONY: install
 install:
 	opam init -ya --comp=$(OPAM_VER) && \

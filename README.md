@@ -1,5 +1,17 @@
+Experimental implementation of CSV parser which support several dialects of it 
+
+## Specification
+
 * https://tools.ietf.org/html/rfc4180
 * http://specs.frictionlessdata.io/csv-dialect/
+
+## How to build
+
+```bash
+$ make install
+$ make
+$ ./scv_dialect.native path/to/my.csv
+```
 
 ## Results of execution
 
