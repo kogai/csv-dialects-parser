@@ -13,12 +13,13 @@ let comma = ','
 let dq = '"'
 let dq2 = "\"\""
 
-let text_data = [^',' '\r' '\n' '"'] [^',' '\r' '\n' '"']*
+let text_data = [^ ',' '\r' '\n' '"'] [^ ',' '\r' '\n' '"']*
 let escaped = text_data | comma | cr | lf | dq2
+let text_data_dialect01 = [^ ',' '\r' '\n'] [^ ',' '\r' '\n']*
 
-rule read =
+rule read_rfc4180 =
   parse
-  | white { read lexbuf }
+  | white { read_rfc4180 lexbuf }
   | crlf { next_line lexbuf; CRLF (info lexbuf) }
   | comma { COMMA (info lexbuf) }
   | dq { FIELD ((info lexbuf), (read_field (Buffer.create 16) lexbuf)) }
@@ -38,3 +39,12 @@ and read_field buf =
   }
   | _ { raise SyntaxError }
   | eof { raise SyntaxError }
+and read_dialect01 =
+  parse
+  | white { read_dialect01 lexbuf }
+  | crlf { next_line lexbuf; CRLF (info lexbuf) }
+  | comma { COMMA (info lexbuf) }
+  | text_data_dialect01 { FIELD ((info lexbuf), (Lexing.lexeme lexbuf)) }
+  | _ { raise SyntaxError }
+  | eof { EOF (info lexbuf) }
+
